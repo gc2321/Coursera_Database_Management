@@ -1,0 +1,26 @@
+1.
+
+SELECT DISTINCT custno, state, zip FROM customer
+
+2.
+
+SELECT empname, phone, email FROM employee WHERE phone LIKE '3%'
+
+3.
+
+SELECT * FROM resourcetbl WHERE rate BETWEEN '10' AND '20' ORDER BY rate
+
+4.
+
+SELECT eventno, dateauth, status FROM eventrequest
+WHERE (status='Approved' OR status='Denied') AND dateauth BETWEEN '2013-07-01' AND '2013-07-31'
+
+5.
+
+SELECT locno, locname, facility.facname FROM location INNER JOIN facility 
+ON location.facno = facility.facno
+
+6.
+
+SELECT planno, COUNT(*) AS numEvenLine, SUM(numberfld) AS sumNrFld FROM eventplanline
+GROUP BY planno HAVING COUNT(*)>0

@@ -1,0 +1,59 @@
+1. Select Statement Problems
+
+1. 
+
+SELECT eventrequest.eventno, eventplanline.planno, COUNT(*) AS countevent
+FROM eventplanline, eventrequest, eventplan
+WHERE eventrequest.eventno = eventplan.eventno AND eventplan.planno = eventplanline.planno
+AND eventplan.workdate BETWEEN '2013-12-01' AND '2013-12-31'
+GROUP BY eventplanline.planno, eventrequest.eventno HAVING COUNT(*)>1
+
+2. 
+
+SELECT planno, eventrequest.eventno, workdate, activity, facname 
+FROM eventplan, eventrequest, facility
+WHERE facility.facno = eventrequest.facno AND eventrequest.eventno = eventplan.eventno
+AND workdate BETWEEN '2013-12-01' AND '2013-12-31'
+AND facname = 'Basketball arena'
+
+3. 
+
+SELECT eventno, dateheld, status, estcost
+FROM eventrequest, facility, customer
+WHERE eventrequest.facno = facility.facno AND customer.custno = eventrequest.custno
+AND facname = 'Basketball arena'
+AND dateheld BETWEEN '2013-10-01' AND '2013-12-31'
+AND contact = 'Mary Manager'
+
+4.
+
+SELECT eventplanline.planno, lineno, resname, numberfld, locname, timestart, timeend
+FROM eventplanline, resourcetbl, location, facility, eventplan
+WHERE location.locno = eventplanline.locno AND eventplanline.resno = resourcetbl.resno
+AND facility.facno = location.facno AND eventplan.planno = eventplanline.planno
+AND facname = 'Basketball arena'
+AND activity = 'Operation'
+AND workdate BETWEEN '2013-10-01' AND '2013-12-31'
+
+
+2. Database Modification Problems
+
+1. 
+
+INSERT INTO facility (facno, facname) VALUES ('F104', 'Swimming Pool')
+
+2.
+
+INSERT INTO location (locno, facno, locname) VALUES ('L107', 'F104', 'Door')
+
+3. 
+
+INSERT INTO location (locno, facno, locname) VALUES ('L108', 'F104', 'Locker room')
+
+4.
+
+UPDATE location SET locname='Gate' WHERE locname='Door' AND facno='F104'
+
+5.
+
+DELETE FROM location WHERE locname='Locker room' AND facno='F104'
